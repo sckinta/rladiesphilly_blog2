@@ -11,24 +11,26 @@ title = "Board"
 subtitle = ""
 
 # Order that this section will appear in.
-weight = 30
+weight = 20
 
 +++
 
 # Meet our board members
 
 ## Darina Chudnovskaya, MSc
-{{< figure library="true" src="Darina.jpg" title="" >}} Darina is a data analyst at a hospital in the Philadelphia area. She uses R to run statistical tests and build models for epidemiological studies with the goal of developing patient interventions for disease prevention. She grew up in Philadelphia. Darina joined R Ladies Philly to meet other R enthusiasts. 
+{{< figure library="true" src="Darina.jpg" title="" class="floatleft" >}}
+ Darina is a data analyst at a hospital in the Philadelphia area. She uses R to run statistical tests and build models for epidemiological studies with the goal of developing patient interventions for disease prevention. She grew up in Philadelphia. Darina joined R Ladies Philly to meet other R enthusiasts. 
 
 ## Karla Fettich, PhD 
-{{< figure library="true" src="Karla.jpeg" title="" >}} Karla works as Head of Algorithm Development at Orchestrall, where she leads behavioral data analytics efforts and predictive model development for healthcare IT innovation. Currently, Karla uses R to create a new product that uses machine learning and predictive analytics to serve as a companion to nurse aides in their care for the elderly. Originally from Romania, Karla completed her B.A. in social and cognitive psychology at Jacobs University Bremen in Germany, her M.A. in social sciences at the University of Chicago and her Ph.D. in psychology and neuroscience at Temple University in Philadelphia. 
+{{< figure library="true" src="Karla.jpeg" title="" class="floatleft" >}}
+ Karla works as Head of Algorithm Development at Orchestrall, where she leads behavioral data analytics efforts and predictive model development for healthcare IT innovation. Currently, Karla uses R to create a new product that uses machine learning and predictive analytics to serve as a companion to nurse aides in their care for the elderly. Originally from Romania, Karla completed her B.A. in social and cognitive psychology at Jacobs University Bremen in Germany, her M.A. in social sciences at the University of Chicago and her Ph.D. in psychology and neuroscience at Temple University in Philadelphia. 
 
 ## Amy Goodwin Davies, PhD
-{{< figure library="true" src="Amy.jpg" title="" >}}
+{{< figure library="true" src="Amy.jpg" title="" class="floatleft" >}}
 Amy is a Data Scientist at the Children's Hospital of Philadelphia with a background in Linguistics. She completed her PhD in Linguistics at the University of Pennsylvania, where her research focused on the grammatical representations involved with spoken word recognition. Originally from the UK, Amy moved to Philadelphia in 2012.
 
 ## Chun Su, PhD
-{{< img library="true" src="Chun.jpg" title="" class="floatleft" >}}
+{{< figure library="true" src="Chun.jpg" title="" class="floatleft" >}}
 Chun is a bioinformatics scientist at the Children's Hospital of Philadelphia, where she explores the influence of the molecular regulatory architecture on the genetic susceptibility for childhood diseases by analyzing genomics data. She completed her PhD in Biology at the University of Virginia, studying a family of parasitic plants that infect crops in Africa. She uses R extensively for statistical analysis and data visualization in her research. Chun joined R Ladies Philly to learn data science and socialize with local R users.
 
 ## Alice Walsh, PhD
