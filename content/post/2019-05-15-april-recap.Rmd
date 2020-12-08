@@ -1,0 +1,60 @@
+---
+title: April Recap - Open Science
+author: R Ladies Philly
+date: '2019-05-15'
+slug: april-recap-open-science
+categories: []
+tags: []
+authors: []
+header:
+  caption: ''
+  image: ''
+  preview: yes
+---
+
+Our April meetup with Data Philly focused on the increasingly popular topic of Open Science. See below for the article that R Ladies Philly members Alice, Karla, and Amy co-wrote! This article originally appeared on [Technical.ly Philly](https://technical.ly/philly/2019/04/18/what-is-open-science-r-ladies/).
+
+#What is open science?
+*It's like open data, but for research. Organizers of the R-Ladies Philly meetup offer an explainer based on talks from their most recent meetup.*
+
+##Many are familiar with the concept of open source in software development, but what is open science?  
+The emerging practice of open science seeks to make tools and data available to researchers worldwide so that scientific advances can be made faster and more cost effectively.  
+
+Contrast this with the traditional model of academic research, where labs often work in silos, rarely make the raw data and analysis code publicly available, and publish in journals that require payment to access content. This lack of transparency, in conjunction with the increasing complexity of data processing techniques, leads to reproducibility problems. Therefore, this “closed” model of doing science is beginning to shift towards a more open approach to research, where the data, code and results are all publicly viewable from the beginning of the project using platforms like **GitHub** and **FigShare**.  
+
+This past Tuesday, local data science meetups [R-Ladies](https://technical.ly/philly/2018/01/03/r-ladies-philly-meetup/) and **DataPhilly** hosted an event at Azavea in Philadelphia with two guest speakers and a discussion of careers in open science.  
+
+**Jaclyn Taroni**, Ph.D. presented her work at the **Childhood Cancer Data Lab** (CCDL), an **Alex’s Lemonade Stand Foundation** initiative based in Philadelphia. CCDL’s mission is to accelerate childhood cancer research by helping researchers worldwide improve their software, scientific workflows and training.   
+
+Second, **Olga Botvinnik**, Ph.D. shared about her role at the **Chan Zuckerberg Biohub** in California. This initiative aims to solve big problems in human health with the lofty goal of curing, preventing or managing all diseases by 2100.  
+
+<center>
+<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">It’s our April event in collaboration with <a href="https://twitter.com/DataPhilly?ref_src=twsrc%5Etfw">@DataPhilly</a>! First up, Jaclyn Taroni PhD is telling us about <a href="https://twitter.com/CancerDataLab?ref_src=twsrc%5Etfw">@CancerDataLab</a> and how these use data for cancer research. <a href="https://t.co/tKW33couMR">pic.twitter.com/tKW33couMR</a></p>&mdash; R-Ladies Philly (@RLadiesPhilly) <a href="https://twitter.com/RLadiesPhilly/status/1118284009820131328?ref_src=twsrc%5Etfw">April 16, 2019</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<center>
+##Why do open science?
+On a personal level, the supportive community, immediate feedback and potential to positively impact scientific progress quickly are some of the main reasons a scientist might practice open science.  
+
+For instance, Botvinnik was drawn to this work based on her experience in single-cell transcriptomics research during graduate school. When she wrote Python packages to analyze data, people around the world provided feedback, liked the package, and used it. This inspired her to want to pursue a research career where all code and data are open from the beginning. She further shared that working on open science projects is great way to build your network and your online presence.  
+
+On a broader, professional level, open science means that more data is available to discern patterns and test predictions against samples with different characteristics. As a result, researchers can not only tackle very difficult and complex problems, but they can also ensure that their findings are more robust and reproducible. Efforts of this scale require coordinated standards for data collection, processing and recording, which are all possible thanks to the latest technological advances and the work of dedicated organizations and scientists.  
+
+Both speakers emphasized their motivation to make tools accessible, since cumbersome data processing methods limit their utility and makes scientific findings difficult to trust and understand, and even more difficult to translate into solutions.  
+
+##How can you get involved in open science?  
+Not everyone working on open science must be an active scientist by profession. Botvinnik recommended connecting to researchers who are active on Twitter, especially about open science, and asking them what you can do to help.  
+
+You can also follow the money: Look for initiatives for open science and see who they are funding. An example is the **Moore-Sloan Data Science Environments** funded by the **Gordon and Betty Moore Foundation** and the **Alfred P. Sloan Foundation**. When it comes time to share your results, consider writing a blog post, which can be a great way to get early feedback.  
+
+Joining local data science groups is another great way to get in touch with researchers and get involved in data analysis projects. In particular, R-Ladies Philly has already developed external partnerships for hands-on analytics projects in the nonprofit sector, and is looking to expand these collaborations to include researchers in the area.  
+
+And both R-Ladies Philly and DataPhilly convene scientists and data enthusiasts through regular meetups that are either hands-on workshops or talks given by experts, which offer ample opportunity for connecting and engaging in exciting research work.  
+
+##Where can you learn more about open data and research?  
+* Publications — Look for open access journals like PLOS ONE, Nature Communications, eLife, Scientific Reports, Journal of Open Source Software, GigaScience, F1000 Research and elsewhere  
+* To learn more about open access publishing, look into groups such as the Open Research Funders Group  
+* Organizations such as the Center for Open Science and rOpenSci  
+* The Center for Open Science is a nonprofit with a mission to “increase the openness, integrity, and reproducibility of scientific research”  
+* rOpenSci is an R-focused nonprofit which promotes “open and reproducible research using shared data and reusable software”  
+* OpenDataPhilly provides access to 300+ datasets related to the Philadelphia region  
+* Meetups such as R-Ladies Philly and DataPhilly  

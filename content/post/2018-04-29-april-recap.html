@@ -1,0 +1,59 @@
+---
+title: "April recap: Introduction to Text Mining with R"
+author: Alice Walsh
+date: '2018-04-29'
+slug: april-recap
+categories:
+  - Meetups
+tags: []
+---
+
+
+
+<div id="our-april-event" class="section level1">
+<h1>Our April Event!</h1>
+<p>The April R-Ladies meetup was held on April 19th at Drexel. Thanks again to Drexel for hosting us and to DataCamp and the R consortium for sponsoring us!</p>
+<p>Our topic was an introduction to text mining in R using the first two chapters of “Text Mining with R” by fellow R-Lady(!) Julia Silge and David Robinson.</p>
+<div class="figure">
+<img src="/img/rladiesapril2.png" alt="There was a great group - including some new faces!" />
+<p class="caption">There was a great group - including some new faces!</p>
+</div>
+<p>Amy took us through the key concepts of the chapter and then we broke into groups to do some exercises together. Here is an example analysis that we completed!</p>
+<pre class="r"><code>book.id &lt;- 51713
+kafka &lt;- gutenberg_download(51713)</code></pre>
+<pre><code>## Determining mirror for Project Gutenberg from http://www.gutenberg.org/robot/harvest</code></pre>
+<pre><code>## Using mirror http://aleph.gutenberg.org</code></pre>
+<pre class="r"><code>data(stop_words)
+
+tidy_kafka &lt;- kafka %&gt;%
+  mutate(linenumber = row_number()) %&gt;%
+  unnest_tokens(word, text)%&gt;%
+  anti_join(stop_words)</code></pre>
+<pre><code>## Joining, by = &quot;word&quot;</code></pre>
+<pre class="r"><code>kafka_sentiment &lt;- tidy_kafka %&gt;%
+  inner_join(get_sentiments(&quot;bing&quot;)) %&gt;%
+  count(index = linenumber %/% 10, sentiment) %&gt;%
+  spread(sentiment, n, fill = 0) %&gt;%
+  mutate(sentiment = positive - negative)</code></pre>
+<pre><code>## Joining, by = &quot;word&quot;</code></pre>
+<pre class="r"><code># PLOT
+ggplot(kafka_sentiment, aes(index, sentiment, fill = sentiment &gt; 0)) +
+  scale_fill_discrete(c(&quot;light blue&quot;,&quot;red&quot;)) + 
+  geom_col(show.legend = FALSE) +
+  ggtitle(&quot;Sentiment in Kafka&#39;s Metamorphosis&quot;) + 
+  theme_bw()</code></pre>
+<p><img src="/post/2018-04-29-april-recap_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>Next, we had an awesome lightning talk from Darina that went into TF-IDF. TF is Term Frequency and IDF is Inverse Document Frequency. Check out her slides to learn more.</p>
+<div class="figure">
+<img src="/img/rladiesapril1.png" alt="Darina presents on TF-IDF" />
+<p class="caption">Darina presents on TF-IDF</p>
+</div>
+</div>
+<div id="for-more-information" class="section level1">
+<h1>For more information</h1>
+<p>The materials from April are posted on GitHub:</p>
+<p><a href="https://github.com/rladies/meetup-presentations_philadelphia" class="uri">https://github.com/rladies/meetup-presentations_philadelphia</a></p>
+<p>For those who want to learn more, I recommend continuing on in the excellent book, “Text Mining with R”:</p>
+<p><a href="https://www.tidytextmining.com" class="uri">https://www.tidytextmining.com</a></p>
+<p><em>This post was authored by Alice Walsh. For more information contact <a href="mailto:philly@rladies.org">philly@rladies.org</a></em></p>
+</div>

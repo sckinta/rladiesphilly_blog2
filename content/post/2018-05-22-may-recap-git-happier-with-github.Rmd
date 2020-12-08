@@ -1,0 +1,54 @@
+---
+title: 'May recap: Git happieR with GitHub'
+author: Katerina Placek
+date: '2018-05-22'
+slug: may-recap
+categories:
+  - Meetups
+tags: []
+---
+
+# Our May Event!
+The May R-Ladies meetup took place on May 16, 2018 at Drexel's LeBow School of Business. Thanks for hosting us again, Drexel, and thanks to our sponsors Datacamp and the R consortium!
+
+Our topic for May was version control using the popular resources Git and GitHub, and we focused on integrating version control with R. 
+
+# Intro
+Darina and I started with an example to illustrate the utility of version control in collaborating on a document or project over time. 
+
+Many popular word processing software packages employ "track changes" as a way to edit a document or share with others for editing or feedback. 
+
+However, using something like track changes for version control is problematic!
+
+![*Our attempt to use 'track changes' to collaborate on a document listing our favorite women from Philadelphia*](/img/RLadies_May1.JPG)
+
+In order to reference previous versions of a document, we would have to go through comment by comment to examine the changes a single collaborator made at a single point in time, or else revert back to the original version of the document and lose all changes!
+
+We turned to the whiteboard to demonstrate how you can use Git to keep track of the evolution of a document or project over time, and how you can use GitHub to collaborate with others on the evolution of a document
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/5_sdaVXlKNM" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+
+# Demo
+After this introduction, Alice led an interactive demo so that R-Ladies Philly could practice integrating Git and GitHub with R.
+
+![](/img/RLadies_May2.jpg)
+
+Through this, members practiced:  
+  - configuring Git locally  
+  - creating a Git repository  
+  - committing changes  
+  - pushing work to a [shared repo](https://github.com/awalsh17/intro_git_live) on GitHub
+
+
+[Alice's slides](https://github.com/rladies/meetup-presentations_philadelphia/tree/master/May2018) are posted on GitHub - this is a great resource to go through if you couldn't make it to the meeting!
+
+# Lightning Talk
+We ended by showing a GitHub repo illustrating 'real world' use of version control with R!
+
+R-Ladies Philly members Karla, Alice, Kristen, and myself recently used Git and GitHub with R to collaborate on a data analysis project for the Philadelphia Animal Welfare Society. 
+
+# For more information
+To learn more, we recommend ["Happy Git and GitHub for the useR"](http://happygitwithr.com) and the free DataCamp course ["Introduction to Git for Data Science"](https://www.datacamp.com/courses/introduction-to-git-for-data-science).
+
+*This post was authored by Katerina Placek. For more information contact philly@rladies.org*

@@ -1,0 +1,74 @@
+---
+title: December Recap
+author: Amy Goodwin Davies
+date: '2019-01-02'
+slug: december-recap
+categories: []
+tags: []
+authors: []
+header:
+  caption: ''
+  image: ''
+  preview: yes
+---
+
+We collaborated with [Women in Kaggle Philly](https://www.meetup.com/Women-in-Kaggle-Philly/) to provide an Introduction to Machine Learning (ML).  
+
+ML is the science of getting computers to learn from data without explicit programming. ML has led to advances in speech recognition, tumor identification, self-driving cars, and many other arenas. You probably interact with ML every day!  
+
+This meetup featured a lightning talk introducing some key concepts followed by a hands-on [Kaggle](https://www.kaggle.com/) competition tutorial.  
+
+## A brief introduction to Machine Learning  
+
+Tamera Lanham, a data scientist at [Elsevier](https://www.elsevier.com/), gave a lightning talk introducing ML. Her slides are available [here](https://docs.google.com/presentation/d/1q8asc4-Enbid575XLmWFSrhoHJxdWxqBi3E0vysq6Vo/edit?usp=sharing).  
+
+Tamera discussed the distinction between **supervised** and **unsupervised** learning:  
+
+* **Supervised** learning involves labelled data. A model can be fitted to this data in order to generate predictions about new data.  
+* **Unsupervised** learning does not involve labelled data. Instead, the model infers structure within the data.  
+
+Tamera overviewed some model types including tree-based models and neural networks. A main take-away was that we shouldn't be afraid to try out some ML techniques!   
+
+<center>  
+<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Tamera Lanham is a <a href="https://twitter.com/hashtag/DataScientist?src=hash&amp;ref_src=twsrc%5Etfw">#DataScientist</a> and machine learning expert! We are demystifying concepts like neural networks. You don’t need to understand in depth to jump in! <a href="https://twitter.com/hashtag/RLadies?src=hash&amp;ref_src=twsrc%5Etfw">#RLadies</a> <a href="https://t.co/FzE6qgnFXu">pic.twitter.com/FzE6qgnFXu</a></p>&mdash; R-Ladies Philly (@RLadiesPhilly) <a href="https://twitter.com/RLadiesPhilly/status/1073361736382775296?ref_src=twsrc%5Etfw">December 13, 2018</a></blockquote>  
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>  
+</center>  
+
+## Kaggle competition tutorial  
+
+Ran Liu, [Women in Kaggle Philly](https://www.meetup.com/Women-in-Kaggle-Philly/) organiser and [PhD Candidate in Sociology at Penn](https://sites.google.com/site/ranliusoci/), led the Kaggle competition tutorial. Before delving into code, Ran introduced **Kaggle** and **Women in Kaggle Philly**:  
+
+*   [Kaggle](https://www.kaggle.com/) is a data science and machine learning online community. Kaggle is famous for hosting machine learning competitions, but it also offers a public data platform, a cloud-based workbench, and educational resources for AI education.  
+*   [Women in Kaggle Philly](https://www.meetup.com/Women-in-Kaggle-Philly/) is a meetup group for women interested in participating and exploring Kaggle competitions within an inclusive and supportive environment. They organize talks, workshops, and social events regularly.
+
+<center>  
+<blockquote class="twitter-tweet" data-cards="hidden" data-lang="en"><p lang="en" dir="ltr">Very excited about collaborating with <a href="https://twitter.com/hashtag/womeninkaggle?src=hash&amp;ref_src=twsrc%5Etfw">#womeninkaggle</a> for this meetup - <a href="https://twitter.com/kaggle?ref_src=twsrc%5Etfw">@kaggle</a> is a resource to learn and practice machine learning. Why? People like Ran share their knowledge and skills 👍🏻 <a href="https://t.co/ecOUh14ik7">pic.twitter.com/ecOUh14ik7</a></p>&mdash; R-Ladies Philly (@RLadiesPhilly) <a href="https://twitter.com/RLadiesPhilly/status/1073368362015752192?ref_src=twsrc%5Etfw">December 14, 2018</a></blockquote>  
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>  
+</center>  
+
+Ran prepared this [R notebook](https://www.kaggle.com/ranliu/r-ladies-philly-intro-to-machine-learning-meetup/notebook) which we worked through during the tutorial.  
+
+We covered the following steps:  
+
+1. **Data Loading** <span style="color:purple">importing the data</span>    
+2. **A Very Simple Exploratory Data Analysis (EDA)** <span style="color:purple">understanding the data</span>    
+3. **Data Preprocessing** <span style="color:purple">AKA data cleaning/wrangling</span>    
+4. **Simple Feature Engineering** <span style="color:purple">creating new predictor variables from the data</span>    
+5. **Modeling & Evaluation** <span style="color:purple">fitting your model and seeing how well it does (we used Lasso regression and XGBoost)</span>    
+6. **Creating Submission File** <span style="color:purple">submitting your prediction to the competition</span>    
+
+We recommend taking a look at Ran's [R notebook](https://www.kaggle.com/ranliu/r-ladies-philly-intro-to-machine-learning-meetup/notebook). It includes R code for each of these steps interleaved with helpful explanations and links to supplementary material.  
+
+## Thank you  
+
+* Many thanks to our expert presenters Tamera Lanham and [Ran Liu](https://sites.google.com/site/ranliusoci/)!  
+* [Orchestrall](https://www.orchestrallinc.com/) sponsored this meetup. Orchestrall creates healthcare solutions for a global world. They greatly value diversity and are very supportive of R-Ladies' mission!  
+* We were hosted by [WeWork](https://www.wework.com/).    
+
+## Resources  
+
+* Tamera Lanham's [slides](https://docs.google.com/presentation/d/1q8asc4-Enbid575XLmWFSrhoHJxdWxqBi3E0vysq6Vo/edit?usp=sharing)  
+* Ran Liu's [R notebook](https://www.kaggle.com/ranliu/r-ladies-philly-intro-to-machine-learning-meetup/notebook) 
+* Tamera recommended François Chollet's [Deep Learning with Python](https://www.oreilly.com/library/view/deep-learning-with/9781617294433/) (for Python users)  
+
+*This post was authored by Amy Goodwin Davies. For more information contact philly@rladies.org*

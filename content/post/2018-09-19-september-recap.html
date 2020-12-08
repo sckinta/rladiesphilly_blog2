@@ -1,0 +1,60 @@
+---
+title: "September Recap: Learn to make a website with R and blogdown!"
+author: 'Katerina Placek'
+date: '2018-09-19'
+slug: september-recap
+categories: []
+tags: []
+---
+
+
+
+<p>In our September meetup hosted at the <a href="https://www.dental.upenn.edu/">Penn Dental School</a>, <a href="https://www.meetup.com/rladies-la/">R-Ladies LA</a> founder and recent Philadelphia transplant Dr. Katie Scranton led an interactive workshop on making websites (like this one!) using R and the <a href="https://github.com/rstudio/blogdown">blogdown</a> package.</p>
+<div id="overview" class="section level2">
+<h2>Overview</h2>
+<p>Katie started off by providing a broad overview of how blogdown works. Blogdown generates websites using Rmarkdown documents, and each blogdown website consists of a single folder of static files. Once created, your blogdown website can then be hosted on any web server to make it ‘live.’</p>
+</div>
+<div id="how-to" class="section level2">
+<h2>How To</h2>
+<p>Next, Katie live-coded website creation in R using blogdown. We worked in parallel on our laptops, so that each meetup attendee left with their own website. Here, we go over some of the essential steps in this process!</p>
+<p>First, we installed blogdown and Hugo. Hugo is the default site generator in blogdown:</p>
+<pre class="r"><code>install.packages(blogdown)
+library(blogdown)
+blogdown::install_hugo()</code></pre>
+<p>Next, we each chose a Hugo <a href="https://themes.gohugo.io/">theme</a> for our website and used this theme to create a new, blank site in our current working directory:</p>
+<pre class="r"><code># create blank website with the Hugo &#39;Academic&#39; theme
+blogdown::new_site(theme = &quot;gcushen/hugo-academic&quot;)
+
+# view your website layout in the RStudio Viewer
+blogdown::serve_site()</code></pre>
+<p>Aside from aesthetic preferences, choosing an appropriate theme for your website involves consideration of your website’s purpose. For example, is it an academic website, a blog, or a general informational website (e.g. for a company or business)? Chances are, there is a theme to best suit your website’s purpose.</p>
+<p>The files for your website now live in your current working directory:</p>
+<pre class="r"><code># see all the files that blogdown::new_site() created
+list.files()</code></pre>
+<p>Then, Katie showed us how to customize our website focusing on the <code>config.toml</code> file that configures the settings for our website:</p>
+<pre class="r"><code># open the config.toml file to edit
+file.edit(&#39;config.toml&#39;)</code></pre>
+<p>…And the <code>content/</code> folder that - as you might have guessed - includes the content of our website:</p>
+<pre class="r"><code>list.files(&quot;content&quot;)</code></pre>
+<p>For example, if we were to create a blogpost for our website using blogdown, this file would automatically appear in <code>content/post</code>:</p>
+<pre class="r"><code>blogdown::new_post(title = &quot;my_first_post&quot;)</code></pre>
+<p>Once created, your website files can be uploaded to any webserver. We use <a href="https://github.com/">github</a> for rladiesphilly.org - to learn more about web hosting and version control, see our <a href="http://rladiesphilly.org/post/may-recap/">May meetup recap</a>. You can see the code used to generate this website hosted on our blog github repo <a href="https://github.com/kplacek/rladiesphilly_blog">here</a>.</p>
+<p>You can use <a href="https://pages.github.com/">GitHub Pages</a> to deploy your website directly from your github repo, or a service like <a href="https://www.netlify.com/">Netlify</a> (to customize your domain name, you may need to purchase a domain, e.g. from <a href="https://domains.google/">google</a>).</p>
+</div>
+<div id="website-example" class="section level2">
+<h2>Website Example</h2>
+<p>To end our workshop and inspire further refinement of our websites, Katie showed us her <a href="https://www.katiescranton.com">personal website</a> created using blogdown.</p>
+</div>
+<div id="resources" class="section level2">
+<h2>Resources</h2>
+<p>Katie suggests the following resources to learn more:</p>
+<ul>
+<li><p>her meetup <a href="https://github.com/rladies/meetup-presentations_philadelphia/blob/master/September2018/meetup-summary.md">summary</a></p></li>
+<li><p>this <a href="https://alison.rbind.io/post/up-and-running-with-blogdown/">post</a> from Alison Presmanes Hill</p></li>
+<li><p>this <a href="https://maraaverick.rbind.io/2017/10/keeping-up-with-blogdown/">post</a> from Mara Averick</p></li>
+<li><p>this <a href="https://rladies-melb-blogdown.netlify.com/#9">guide</a> from R-Ladies Melbourne</p></li>
+<li><p>and <a href="https://bookdown.org/yihui/blogdown/">the blogdown online book</a></p></li>
+</ul>
+<p>Thanks again to Katie for leading this informative meetup, and to Penn Dental for hosting R-Ladies Philly!</p>
+<p><em>This post was authored by Katerina Placek. For more information contact <a href="mailto:philly@rladies.org">philly@rladies.org</a></em></p>
+</div>

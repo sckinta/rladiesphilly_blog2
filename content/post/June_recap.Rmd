@@ -1,0 +1,57 @@
+---
+title: 'June recap: Data Cleaning with R'
+author: "Amy Goodwin Davies"
+date: '2018-06-21'
+slug: june-recap
+categories:
+  - Meetups
+tags: []
+---
+
+# Our June meetup
+
+Our June meetup was about cleaning data using R. Data cleaning is the process of preparing your data for analysis; ensuring that it is technically correct and in the desired format. Data cleaning can often be more time-consuming than the actual analysis!
+
+We were live tweeting the event! Check out some tweets below.
+
+## Introduction
+
+Darina and Katerina provided an introduction to data cleaning, with a focus on the process of ensuring the data is technically correct. [Their presentation on data cleaning](https://github.com/rladies/meetup-presentations_philadelphia/blob/master/June2018/The%20Exciting%20Presentation%20on%20Data%20Cleaning!.pptx) is posted on github. They referenced Chapters 1-2 of ["An Introduction to Data Cleaning with R"](https://cran.r-project.org/doc/contrib/de_Jonge+van_der_Loo-Introduction_to_data_cleaning_with_R.pdf) by Edwin de Jonge and Mark van der Loo, which we recommend you take a look at to learn more.
+
+We covered topics such as:
+
+* Importing data into R
+* Best practice for inspecting data
+* Dealing with NAs versus NaNs
+* Variable types
+* Dealing with inconsistent data
+* Reshaping and pivoting data
+
+The presentation was supplemented by a live demo on some raw data about Philly's farmers' markets. [Check out the data and the code on github.](https://github.com/rladies/meetup-presentations_philadelphia/tree/master/June2018)
+
+<center>
+<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Using farmer&#39;s market data to learn about cleaning data with R tonight. Data set includes long, lat, address, address notes, day, time, accepts snap, major bus and subway routes data <a href="https://twitter.com/hashtag/rstats?src=hash&amp;ref_src=twsrc%5Etfw">#rstats</a> <a href="https://twitter.com/hashtag/RLadies?src=hash&amp;ref_src=twsrc%5Etfw">#RLadies</a> <a href="https://t.co/QnecAfs43D">pic.twitter.com/QnecAfs43D</a></p>&mdash; R-Ladies Philly (@RLadiesPhilly) <a href="https://twitter.com/RLadiesPhilly/status/1009928201102077952?ref_src=twsrc%5Etfw">June 21, 2018</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</center>
+
+## Irem Celen's lightning talk: "Cleaning up Messy Genetics Data"
+
+After the introduction, [Irem Celen](https://www.linkedin.com/in/irem-celen) delivered a lightning talk about an important application of data cleaning: Messy genetics data! Irem is a Ph.D. candidate in Bioinformatics and Systems Biology at the University of Delaware. In her talk she outlined some common data cleaning issues for genetics data as well as some great solutions in R.
+<!-- [Irem's slides]() are also posted on github.  -->
+
+<center>
+<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Lifesaver R libraries for cleaning data: dplyr, tidyr, stringr, readr, data.table <a href="https://twitter.com/hashtag/rstats?src=hash&amp;ref_src=twsrc%5Etfw">#rstats</a> <a href="https://twitter.com/hashtag/RLadies?src=hash&amp;ref_src=twsrc%5Etfw">#RLadies</a></p>&mdash; R-Ladies Philly (@RLadiesPhilly) <a href="https://twitter.com/RLadiesPhilly/status/1009941191532711937?ref_src=twsrc%5Etfw">June 21, 2018</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</center>
+
+<center>
+![Irem's lightning talk](/img/june_lightning.JPG)
+</center>
+
+### WeWork
+
+We would like to thank WeWork for hosting our June meetup!
+
+"WeWork is a community for creators. We transform buildings into beautiful, collaborative workspaces and provide the infrastructure, services, events and technology so our members can focus on doing what they love. WeWork currently has 111 locations in 29 cities across the world with over 70,000 members. Book a tour at wework.com now!"
+
+*This post was authored by Amy Goodwin Davies. For more information contact philly@rladies.org*

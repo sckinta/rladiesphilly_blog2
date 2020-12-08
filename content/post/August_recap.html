@@ -1,0 +1,84 @@
+---
+title: 'August recap: Data Cleaning with R, Part 2'
+author: "Amy Goodwin Davies"
+date: '2018-08-15'
+slug: aug-recap
+tags: []
+categories: 
+- Meetups
+---
+
+
+
+<p>Data cleaning is the process of preparing your data for analysis; ensuring that it is technically correct and in the desired format. Data cleaning can often be more time-consuming than the actual analysis! This was our second meetup on the topic. <a href="http://rladiesphilly.org/post/june-recap/">Click here for a recap of our first data cleaning meetup in June.</a></p>
+<div id="reshaping-data" class="section level2">
+<h2>Reshaping data</h2>
+<p>We began with an introduction to reshaping data from Alice. The presentation was based on the DataCamp tutorial <a href="https://www.datacamp.com/community/tutorials/long-wide-data-R">Long to Wide Data in R</a>. Data can be <strong>long format</strong> (<em>one measurement per row</em>) and <strong>wide format</strong> (<em>many measurements in one row</em>). It is important to be able to convert between the two formats as different functions require different formats. In R, there are a variety of functions which can be used for this task:</p>
+<center>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Function</th>
+<th align="left">Package</th>
+<th align="left">To long format</th>
+<th align="left">To wide format</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">stack/unstack</td>
+<td align="left">utils</td>
+<td align="left">stack</td>
+<td align="left">unstack</td>
+</tr>
+<tr class="even">
+<td align="left">reshape</td>
+<td align="left">stats</td>
+<td align="left">reshape(direction = “long”, …)</td>
+<td align="left">reshape(direction = “wide”, …)</td>
+</tr>
+<tr class="odd">
+<td align="left">melt/dcast</td>
+<td align="left">reshape2</td>
+<td align="left">melt</td>
+<td align="left">dcast</td>
+</tr>
+<tr class="even">
+<td align="left">melt/dcast</td>
+<td align="left">tidyr</td>
+<td align="left">gather</td>
+<td align="left">spread</td>
+</tr>
+</tbody>
+</table>
+<p><em>Functions for converting to long format and wide format (adapted from Table 34 from <a href="https://www.datacamp.com/community/tutorials/long-wide-data-R">Long to Wide Data in R</a>)</em></p>
+</center>
+<p>Alice provided a few examples of how to use these functions. <a href="https://github.com/rladies/meetup-presentations_philadelphia/blob/master/August2018/reshape_examples.R">The script is available on github.</a></p>
+<center>
+<blockquote class="twitter-tweet" data-lang="en">
+<p lang="en" dir="ltr">
+Pros &amp; cons of each wide to long approach. Gather is brief. You have to specify more when using melt. <a href="https://twitter.com/hashtag/RLadies?src=hash&amp;ref_src=twsrc%5Etfw">#RLadies</a> <a href="https://twitter.com/hashtag/rstats?src=hash&amp;ref_src=twsrc%5Etfw">#rstats</a>
+</p>
+— R-Ladies Philly (<span class="citation">@RLadiesPhilly</span>) <a href="https://twitter.com/RLadiesPhilly/status/1027688436596129793?ref_src=twsrc%5Etfw">August 9, 2018</a>
+</blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</center>
+</div>
+<div id="the-r-ladies-data-cleaning-gauntlet" class="section level2">
+<h2>The R-Ladies Data Cleaning Gauntlet!</h2>
+<p>Next up was a series of data cleaning challenges which we tackled in small groups. The challenges, created by Alice, meant putting into practice approaches and techniques from both data cleaning meetups. We cleaned the <a href="http://data-phl.opendata.arcgis.com/datasets/0707c1f31e2446e881d680b0a5ee54bc_0">Philly farmers’ markets data</a> which was also featured in our June meetup.</p>
+<p>The materials are available on github:</p>
+<ul>
+<li><p><a href="https://github.com/rladies/meetup-presentations_philadelphia/blob/master/August2018/challenge.Rmd">The R-Ladies Data Cleaning Gauntlet</a></p></li>
+<li><p><a href="https://github.com/rladies/meetup-presentations_philadelphia/blob/master/August2018/challenge_answers.Rmd">Possible solutions</a> <em>Get in touch (<a href="mailto:philly@rladies.org">philly@rladies.org</a>) if you have a nice solution that isn’t featured here!</em></p></li>
+</ul>
+<center>
+<img src="/img/aug_challenge.jpg" alt="RLadies working on the data cleaning challenges" />
+</center>
+<div id="wework" class="section level3">
+<h3>WeWork</h3>
+<p>We would like to thank WeWork for hosting us!</p>
+<p>“WeWork is a community for creators. We transform buildings into beautiful, collaborative workspaces and provide the infrastructure, services, events and technology so our members can focus on doing what they love. WeWork currently has 111 locations in 29 cities across the world with over 70,000 members. Book a tour at wework.com now!”</p>
+<p><em>This post was authored by Amy Goodwin Davies. For more information contact <a href="mailto:philly@rladies.org">philly@rladies.org</a></em></p>
+</div>
+</div>

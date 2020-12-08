@@ -1,0 +1,53 @@
+---
+title: February and March Recap - PAWS Community Data Project
+author: Katerina Placek
+date: '2019-04-06'
+slug: feb-march-recap
+categories: []
+tags: []
+authors: []
+header:
+  caption: ''
+  image: ''
+  preview: yes
+---
+In February and March, R-Ladies Philly continued a longstanding community data project with the Philadelphia Animal Welfare Society [(PAWS)](https://phillypaws.org/) - Philly's largest no-kill shelter. Last year, we helped PAWS analyze data from volunteer engagement to identify patterns associated with continued volunteering. This year, we worked with PAWS to understand important facets of their sheltering system, including 1) animals' trajectories at PAWS, 2) the adoption process, 3) geospatial patterns of adoptions, and 4) public engagement via social media. 
+
+## Project Description and Timeline
+In our February Kickoff meetup, R-Ladies Philly co-organizer and PAWS volunteer Karla oriented us to the datasets we'd be working with over the next month and PAWS representative Ame Wiltzius discussed project goals and outcomes. The datasets we analyzed were contained records of animal characteristics, adoption applications and outcomes, and PAWS' tweets, all from 2018. We formed 4 analysis groups, and each group met periodically throughout February and March to formulate research questions and analyze data. In our March meetup, each group presented their major findings:
+
+#### Animal Trajectories
+The 'Animal Trajectories' group (Alex, Jake, Javier, and Katerina) examined how animals' attributes (e.g. breed, age, health), PAWS location, and seasonal patterns contributed to how long an animal stayed at PAWS.
+
+![A great infographic looking at factors influencing variation in dogs' wait times at PAWS](/img/paws1.png)
+
+Major findings included the identification of spring and summer months as high animal intake seasons for cats, particularly those who are sick.
+
+#### Adoption Applications
+The 'Adoption Applications' group (Ramaa, Kate, Veena, Amy, Brendan, Ambika) focused on identifying factors that increased or decreased a PAWS adoption application's timeline.
+![The Adoption Applications group presenting their work!](/img/paws2.jpeg)
+They found that adoption applications for cats tend to take longer than those for dogs, that single people comprise the majority of applicants, and denied applications - though rare - are from individuals with a prior history of pet ownership.
+
+#### Geographic Data Mining
+The 'Geographic Data Mining' group (Joy, Karla) investigated how neighborhood economic status affects PAWS adoption applications, and what population characteristics contribute to efficiency of application processing. 
+
+![Karla explains a map of the Philadelphia area highlighting zip codes with faster PAWS application processing times.](/img/paws3.jpeg)
+
+Joy and Karla found that problematic applications typically have a budget too low to support an animal, and that more efficient application processing takes place in neighborhoods with a greater percentage of school-aged children.
+
+#### @phillypaws Twitter
+Last but not least, Alice singlehandedly took on the analysis of [PAWS' twitter account](https://twitter.com/phillypaws) data from 2018, and explored whether patterns in twitter activity were linked to application or pet information.
+
+![Alice demonstrates that cats are popular on the @phillypaws twitter account!](/img/paws4.png)
+
+While no patterns between tweets / applications were observed, Alice did confirm that tweets containing cat pictures were popular!
+
+## Wrap Up
+Based on each groups analyses, we concluded our community data project by working with PAWS staff and volunteers to identify ways to streamline data collection and analysis. We look forward to collaborating with PAWS in the future, and were happy to contribute 'R' skills to help out our furry friends in the Philly area!
+
+
+## Thank you  
+* Thanks to [Drexel](https://www.wework.com/) for hosting us! 
+
+
+*This post was authored by Katerina Placek. For more information contact philly@rladies.org*

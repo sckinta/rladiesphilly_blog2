@@ -1,0 +1,55 @@
+---
+title: 'August recap: Data Cleaning with R, Part 2'
+author: "Amy Goodwin Davies"
+date: '2018-08-15'
+slug: aug-recap
+tags: []
+categories: 
+- Meetups
+---
+
+Data cleaning is the process of preparing your data for analysis; ensuring that it is technically correct and in the desired format. Data cleaning can often be more time-consuming than the actual analysis! This was our second meetup on the topic. [Click here for a recap of our first data cleaning meetup in June.](http://rladiesphilly.org/post/june-recap/) 
+
+## Reshaping data
+
+We began with an introduction to reshaping data from Alice. The presentation was based on the DataCamp tutorial [Long to Wide Data in R](https://www.datacamp.com/community/tutorials/long-wide-data-R). Data can be **long format** (*one measurement per row*) and **wide format** (*many measurements in one row*). It is important to be able to convert between the two formats as different functions require different formats. In R, there are a variety of functions which can be used for this task:
+
+<center>
+| Function | Package | To long format | To wide format |
+|:-----|:-----|:-----|:-----|
+| stack/unstack | utils | stack | unstack |
+| reshape | stats | reshape(direction = "long", ...) | reshape(direction = "wide", ...) |
+| melt/dcast | reshape2 | melt | dcast | 
+| melt/dcast | tidyr | gather | spread | 
+*Functions for converting to long format and wide format (adapted from Table 34 from [Long to Wide Data in R](https://www.datacamp.com/community/tutorials/long-wide-data-R))*
+
+</center>
+
+Alice provided a few examples of how to use these functions. [The script is available on github.](https://github.com/rladies/meetup-presentations_philadelphia/blob/master/August2018/reshape_examples.R)
+
+<center>
+<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Pros &amp; cons of each wide to long approach. Gather is brief. You have to specify more when using melt. <a href="https://twitter.com/hashtag/RLadies?src=hash&amp;ref_src=twsrc%5Etfw">#RLadies</a> <a href="https://twitter.com/hashtag/rstats?src=hash&amp;ref_src=twsrc%5Etfw">#rstats</a></p>&mdash; R-Ladies Philly (@RLadiesPhilly) <a href="https://twitter.com/RLadiesPhilly/status/1027688436596129793?ref_src=twsrc%5Etfw">August 9, 2018</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</center>
+
+## The R-Ladies Data Cleaning Gauntlet!
+
+Next up was a series of data cleaning challenges which we tackled in small groups. The challenges, created by Alice, meant putting into practice approaches and techniques from both data cleaning meetups. We cleaned the [Philly farmers' markets data](http://data-phl.opendata.arcgis.com/datasets/0707c1f31e2446e881d680b0a5ee54bc_0) which was also featured in our June meetup. 
+
+The materials are available on github:
+
+* [The R-Ladies Data Cleaning Gauntlet](https://github.com/rladies/meetup-presentations_philadelphia/blob/master/August2018/challenge.Rmd)
+
+* [Possible solutions](https://github.com/rladies/meetup-presentations_philadelphia/blob/master/August2018/challenge_answers.Rmd) *Get in touch (philly@rladies.org) if you have a nice solution that isn't featured here!*
+
+<center>
+![RLadies working on the data cleaning challenges](/img/aug_challenge.jpg)
+</center>
+
+### WeWork
+
+We would like to thank WeWork for hosting us!
+
+"WeWork is a community for creators. We transform buildings into beautiful, collaborative workspaces and provide the infrastructure, services, events and technology so our members can focus on doing what they love. WeWork currently has 111 locations in 29 cities across the world with over 70,000 members. Book a tour at wework.com now!"
+
+*This post was authored by Amy Goodwin Davies. For more information contact philly@rladies.org*

@@ -1,0 +1,321 @@
+---
+title: "November Recap - Geographic Information Systems"
+author: "Katerina Placek"
+date: '2018-12-04'
+slug: november-recap
+tags: []
+categories: []
+---
+
+```{r code load, echo=F, results='hide', warning=FALSE, message = FALSE}
+# Load packages
+library(sp) 
+library(rgdal)
+library(rgeos)
+library(tidyverse)
+library(raster)
+library(tmap)
+library(tmaptools)
+library(leaflet)
+library(RColorBrewer)
+library(spgwr)
+library(jsonlite)
+```
+
+Geographic Information Systems or GIS are specialized technology used for spatial data that require mapping. In our November meetup, R-Ladies Philly member and GIS Specialist Mary Lennon introduced R-Ladies Philly to manipulating and plotting spatial data from our favorite city (Philly!) in our favorite language (R!)! 
+
+##How can we access and store spatial data?
+First, Mary explained that GIS data can be stored in different formats including Shapefiles, GPX, and GeoJSON. In this workshop, we used Shapefile because it is the most commonly used format, and is publically available. Briefly, Shapefiles store the geometric location and attributes of geographic features (e.g. census areas in Philadelphia) based on vector features. Vector features consist of individual points with x/y (latitude/longitude) coordinates that can be joined to create a line or a polygon. Although we did not work with this data type, GIS data can also be stored in 'raster' format which plot spatial data as pixels or cells, with each pixel having a specific assigned value.
+
+We worked with two datasets during this workshop:
+
+* 1) Spatial data from tidycensus (available [here](https://walkerke.github.io/tidycensus/index.html) )
+
+* 2) Tabular data from the publicly-available American Community Survey dataset (ACS), which contains information about the US and its people with known spatial components at national, regional, and local levels. 
+
+##Using R to represent spatial data visually
+We read in spatial data from tidycensus using the [rgdal](https://cran.r-project.org/web/packages/rgdal/index.html) package and plotted it using default settings:
+
+```{r Read Spatial Data, echo=T, eval = F}
+# Read in the shapefile, and see file structure
+census_boundaries <- rgdal::readOGR("Census_Boundaries",layer = "cb_2017_42_tract_500k")
+```
+
+```{r echo = FALSE, eval = TRUE}
+census_boundaries <-
+  rgdal::readOGR("/Users/katerinaplacek/Documents/R/RLadies_Philly/spatial/Spatial_Workshop_Data/Census_Boundaries",
+          layer = "cb_2017_42_tract_500k")
+
+```
+
+```{r Data Organization, echo = T, eval = T}
+head(census_boundaries@data) # here, we focus on the @data slot as it contains the attribute information for the shapefile
+```
+
+```{r Plot Spatial Data, echo = T, eval = F}
+plot(census_boundaries) # use default plotting to examine data
+```
+
+##Incorporating spatial data with nonspatial data, and other spatial data
+Next, we learned to incorporate non-spatial data from ACS with spatial data from tidycensus to aid in geographical distinction between variables pertinent to the Philadelphia community.
+
+We imported and inspected the nonspatial data from ACS:
+```{r echo = FALSE, eval = TRUE}
+# Read data from the web
+acs_data <- read.csv('/Users/katerinaplacek/Documents/R/RLadies_Philly/spatial/Spatial_Workshop_Data/ACS_Data/acs_data.csv')
+```
+
+```{r Read in NonSpatial Data, echo = T, eval = F}
+acs_data <- read.csv('acs_data.csv')
+```
+```{r}
+head(acs_data)
+```
+
+And then merged the nonspatial ACS data with the spatial data from tidycensus by each data point's GEOID:
+```{r Joining Non-Spatial and Spatial Data, echo=T, eval = T}
+# The spatial object needs to be listed first in the merge function for the result to be a spatial object.
+acs_spatial <-
+  sp::merge(x = census_boundaries, y = acs_data, by = "GEOID")
+```
+
+We then learned how to incorporate spatial data from tidycensus with spatial data from ACS - this is essential for plotting geographically precise datapoints, for instance on a map. Mary emphasized the importance of each dataset's coordinate reference system, or CRS, for mapping. The CRS specififes 'where in the world' your spatial data exists, and can be expressed in different coordinate systems (see [espi.io](https://espg.io) for a reference list of coordinate systems).
+
+To find which CRS your spatial data are stored in, we use the following function and the CRS is listed after "+ellps"; Here, our data are in the GRS80 reference system:
+```{r include = F, eval = T}
+Phila_County <-
+  readOGR(dsn = "/Users/katerinaplacek/Documents/R/RLadies_Philly/spatial/Spatial_Workshop_Data/Philadelphia_County_Boundary",
+          layer = "Philadelphia_County_NAD83")
+
+acs_philly <- subset(x = acs_spatial, subset = COUNTYFP == 101)
+```
+
+```{r include = T, eval = T}
+# The ACS spatial data
+acs_philly@proj4string
+
+# The Philadelphia county boundary
+Phila_County@proj4string
+```
+
+Importantly, in order for two datasets to be joined together, they must have the same CRS! In our data, this is the case, but if you needed to change the CRS of your datasets, you can do so using the [sp](https://cran.r-project.org/web/packages/sp/index.html) package:
+```{r include = F, eval = T}
+WGS84 <- "+init=epsg:4326"
+```
+
+```{r include = T, eval = T}
+Phila_County <- sp::spTransform(x = Phila_County, CRSobj = WGS84)
+acs_spatial <- sp::spTransform(x = acs_spatial, CRSobj = WGS84)
+```
+Here, we have put both the Phila_County data from tidycensus and the ACS spatial data in the 'WGS84' CRS which is commonly used in GIS.
+
+Once they were in the same CRS, we used [raster](https://cran.r-project.org/web/packages/raster/index.html) to join the two datasets:
+```{r}
+acs_philly <-
+  raster::intersect(Phila_County,
+                    acs_spatial)
+```
+
+
+
+## Now, on to plotting!
+Now, with spatial and demographic data from the ACS successfully combined with census information, we can plot different features of Philadelphia.
+
+```{r Recoding variables, eval = T, include = F}
+
+# First we are going to cut down the number of variables we have in the dataset
+# We are going to accomplish this with the subset function from the tidyverse.
+# This time there is a select function within the subset function to allow
+# us to choose the variables we want to keep.
+
+# For the purposes of this excercise we are going
+# to limit our efforts to State (STATEFP.1), County (COUNTYFP.1),
+# Census Tract (TRACTCE), Tract Name (NAME.y), and the varying estimates (_estimate),
+# and MOE's for the dataset (_moe).
+acs_philly <- subset(
+  x = acs_philly,
+  select = c(
+    "STATEFP.1",
+    "COUNTYFP.1",
+    "TRACTCE",
+    "NAME.y",
+    "B08121_001_estimate",
+    "B08121_001_moe",
+    "Total_Worked_At_Home_estimate",
+    "Total_Worked_At_Home_021_moe",
+    "Total_Married_Couple_Family_estimate",
+    "Total_Married_Couple_Family_moe",
+    "Total_PopOneRace_White_estimate",
+    "Total_PopOneRace_White_moe"
+  )
+)
+
+# New variable names
+var_names <-
+  c("State",
+    "County",
+    "Census_Tract",
+    "Tract_Name",
+    "MedInc_Est",
+    "MedInc_Moe",
+    "Total_Worked_At_Home_estimate",
+    "Total_Worked_At_Home_021_moe",
+    "Total_Married_Couple_Family_estimate",
+    "Total_Married_Couple_Family_moe",
+    "Total_PopOneRace_White_estimate",
+    "Total_PopOneRace_White_moe"
+    )
+
+# Rename the variables
+names(acs_philly@data) <- var_names
+
+# Create a new variable that bands the median income by quartiles.
+acs_philly@data$MedIncQuart <-
+  ntile(x = acs_philly@data$MedInc_Est, n = 4)
+
+```
+
+Here, we plot the medium income for each census tract in the Philadelphia area:
+```{r include = T, eval = F}
+tm_shape(acs_philly) + tm_fill("MedInc_Est", palette = "Reds")
+```
+![](/img/spatial_1.png)
+
+We can further alter the presentation of this data by using built-in features from the [tmap](https://cran.r-project.org/web/packages/tmap/vignettes/tmap-getstarted.html) package:
+```{r eval = F, include = T}
+tm_shape(acs_philly) + 
+  #Setting the color and style of the mapping
+  tm_fill(
+  "MedInc_Est",
+  style = "jenks",
+  n = 5,
+  palette = "Reds",
+  legend.hist = TRUE
+) +
+  
+  #Altering the legend
+  tm_layout(
+    "ACS 2017 - Median Income",
+    legend.title.size = 1,
+    legend.text.size = 0.6,
+    legend.width = 1.0,
+    legend.outside = TRUE,
+    legend.bg.color = "white",
+    legend.bg.alpha = 0,
+    frame = FALSE
+  )
+```
+![](/img/spatial_2.png)
+
+...And we can add in further spatial data from SEPTA to plot ACS data relative to census spatial data AND public transportation access:
+
+```{r eval = T, include = F}
+SEPTA_RR <-
+  readOGR(dsn = "/Users/katerinaplacek/Documents/R/RLadies_Philly/spatial/Spatial_Workshop_Data/SEPTA_RegionalRail",
+          layer = "SEPTAGISRegionalRailLines_201207")
+
+# SEPTA Stations shapefile
+SEPTA_Staions <-
+  readOGR(dsn = "/Users/katerinaplacek/Documents/R/RLadies_Philly/spatial/Spatial_Workshop_Data/SEPTA_RegionalRail",
+          layer = "SEPTAGISRegionalRailStations_2016")
+
+# Make sure it is in the correct CRs
+SEPTA_RR <- sp::spTransform(x = SEPTA_RR, CRSobj = WGS84)
+SEPTA_Staions <- sp::spTransform(x = SEPTA_Staions, CRSobj = WGS84)
+```
+
+```{r include =T, eval = F}
+tm_shape(acs_philly) + 
+  
+  #Setting the color and style of the mapping
+  tm_fill(
+  "MedInc_Est",
+  style = "jenks",
+  n = 5,
+  palette = "Reds",
+  legend.hist = TRUE
+) +
+  
+  #Altering the legend
+  tm_layout(
+    "ACS 2017 - Median Income",
+    legend.title.size = 1,
+    legend.text.size = 0.6,
+    legend.width = 1.0,
+    legend.outside = TRUE,
+    legend.bg.color = "white",
+    legend.bg.alpha = 0,
+    frame = FALSE
+  ) + 
+  
+  #Adding in SEPTA stations and the lines of transport beween them
+  tm_shape(SEPTA_RR) +
+  tm_lines(col = "black", scale = 1, alpha = 0.25) +
+  tm_shape(SEPTA_Staions) +
+  tm_dots(
+    col = "black",
+    scale = 2.5,
+    alpha = 0.7,
+    shape = 16
+  )
+```
+![](/img/spatial_3.png)
+
+For an even more visually-appealing map, we can add in a 'basemap' to the background:
+```{r message = F}
+tmap_mode("view") # View for interactive
+
+tm_shape(acs_philly) + 
+  
+  #Setting the color and style of the mapping
+  tm_fill(
+  "MedInc_Est",
+  style = "jenks",
+  n = 5,
+  palette = "Reds",
+  legend.hist = TRUE
+) +
+  
+  #Altering the legend
+  tm_layout(
+    "ACS 2017 - Median Income",
+    legend.title.size = 1,
+    legend.text.size = 0.6,
+    legend.width = 1.0,
+    legend.outside = TRUE,
+    legend.bg.color = "white",
+    legend.bg.alpha = 0,
+    frame = FALSE
+  ) + 
+  
+  #Adding in SEPTA stations and the lines of transport beween them
+  tm_shape(SEPTA_RR) +
+  tm_lines(col = "black", scale = 1, alpha = 0.25) +
+  tm_shape(SEPTA_Staions) +
+  tm_dots(
+    col = "black",
+    scale = 2.5,
+    alpha = 0.7,
+    shape = 16
+  ) +
+  tm_basemap(providers$OpenStreetMap.BlackAndWhite)
+```
+
+And there you have it - an introduction to GIS in R!
+
+## Resources
+Mary has kindly provided the materials from the November meetup on her [github](https://github.com/MaryELennon/RLadies_Spatial), and she suggests the following spatial datasets if you're interested in exploring more:
+
+* [PASDA](http://www.pasda.psu.edu/) - Open GIS Data Access for Pennsylvania. Includes a variety of different types of data both raster and vector ranging from centerlines to roads to flood depth grids.
+
+* [Open Data Philly](https://www.opendataphilly.org/) - A catalog of all the open data in the Philadelphia region (some of which is spatial). The repository covers topics from arts and culture to politics and real-estate.
+
+* [National Map Viewer](https://apps.nationalmap.gov/download/) - The data download for the National Map Viewer, maintained by the United Staes Geological Survey primarily has land cover and elevation data. This is a good place to get a raster to play with.
+
+* [Open Government](https://www.data.gov/open-gov/) - Open data repository for the US government covering everything from agriculture to maritime and finance.
+
+
+## Thank You Mary, Sponsors, and WeWork!
+Many thanks to Mary for leading this informative meetup, to Mica Data Labs and the [PENN Masters in Urban Spatial Analytics program](https://www.design.upenn.edu/musa/news) for sponsoring delicious pizza and refreshments, and to [WeWork](https://www.wework.com/) for hosting R-Ladies Philly!
+
+*This post was authored by Katerina Placek. For more information contact philly@rladies.org*

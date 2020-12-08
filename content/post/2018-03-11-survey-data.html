@@ -1,0 +1,223 @@
+---
+title: Who are the Philly R-Ladies? Analyzing Data from Google Forms
+author: Alice Walsh
+date: '2018-03-11'
+slug: survey
+categories: []
+tags: []
+---
+
+
+
+<div id="why-do-a-new-member-survey" class="section level2">
+<h2>Why do a new member survey?</h2>
+<p>One of the goals of R-Ladies Philly is for the group to be focused on the needs and interests of its members. With this goal in mind, we created a survey to query members about meeting logistics and R experience level. This survey also provided a mechanism to collect emails in order to invite new members to our Slack channel.</p>
+<p>If you want to join us and fill out the survey, you can find it here: <a href="http://bit.ly/rladies-survey" class="uri">http://bit.ly/rladies-survey</a></p>
+<p>I thought it would be fun to share the results. Because this is R-Ladies, I also wanted to analyze and visualize the data in <em>R</em>!</p>
+</div>
+<div id="step-one-get-the-data-from-google-to-r" class="section level2">
+<h2><strong>Step One:</strong> Get the data from google to R</h2>
+<p>There are probably many ways to accomplish getting the data from a google form into R. The first things that came to my mind were:</p>
+<ol style="list-style-type: decimal">
+<li>Download a file from google to some local place on my computer</li>
+<li>Use an R package to pull the data from google docs to R</li>
+</ol>
+<p>I decided to try the googlesheets package: <a href="https://github.com/jennybc/googlesheets" class="uri">https://github.com/jennybc/googlesheets</a></p>
+<p>I found this package very user-friendly and easy to figure out. You will see below that a couple commands get the job done.</p>
+<p>What I did here is not fully automated. I did visit the survey on docs.google.com and click the option to “View responses in Sheets”. In the resulting sheet, I removed email addresses to anonymize the respondents.</p>
+<pre class="r"><code>library(googlesheets)
+suppressPackageStartupMessages(library(tidyverse))</code></pre>
+<p>The first step is to authenticate with google and see what sheets you have available. The following will open a browser window and ask you to tell google you want to look at your data.</p>
+<pre class="r"><code>my_sheets &lt;- gs_ls()</code></pre>
+<p>I had made a sheet called, “survey_responses_03_09_2018”, that holds the survey data. You can access it through the key: “1g3-M2fMF7_7pLGv7MttZ0DFjr9jd8jr6zQFxJAccEnw”</p>
+<p>You can create the googlesheets objects with gs_key() and then pipe this to a data frame with gs_read().</p>
+<pre class="r"><code>rsurvey &lt;- gs_key(&quot;1g3-M2fMF7_7pLGv7MttZ0DFjr9jd8jr6zQFxJAccEnw&quot;) %&gt;%
+  gs_read()</code></pre>
+<p>As of March 9, there were 39 responses from the survey.</p>
+</div>
+<div id="step-two-make-some-plots" class="section level2">
+<h2><strong>Step Two:</strong> Make some plots</h2>
+<p>For each question, let’s look at the results.</p>
+<p><strong>How would you describe your current R usage?</strong></p>
+<pre class="r"><code>question &lt;- &quot;How would you describe your current R usage?&quot;
+rsurvey[[question]] &lt;- gsub(&#39;(.{1,30})(\\s|$)&#39;, &#39;\\1\n&#39;, rsurvey[[question]])
+
+ggplot(rsurvey, aes(x=`How would you describe your current R usage?`)) +
+  geom_bar() +
+  coord_flip() + 
+  ggtitle(question) + 
+  xlab(&quot;&quot;) + 
+  theme_minimal() </code></pre>
+<p><img src="/post/2018-03-11-survey-data_files/figure-html/q1-1.png" width="672" /></p>
+<p><strong>What location do you prefer for future meetings?</strong></p>
+<pre class="r"><code>question &lt;- &quot;What location do you prefer for future meetings?&quot;
+
+responses &lt;- rsurvey[, question, drop=FALSE] %&gt;%
+  separate(question, sep = &quot;, &quot;, into = c(&quot;first&quot;, &quot;second&quot;, &quot;third&quot;), extra=&quot;drop&quot;) %&gt;%
+  gather(choice, response, na.rm = TRUE)
+
+ggplot(responses, aes(x=response)) +
+  geom_bar() +
+  coord_flip() + 
+  ggtitle(question) + 
+  xlab(&quot;&quot;) + 
+  theme_minimal()</code></pre>
+<p><img src="/post/2018-03-11-survey-data_files/figure-html/q2-1.png" width="672" /></p>
+<p><strong>What time do you prefer?</strong></p>
+<pre class="r"><code>question &lt;- &quot;What time do you prefer? (planning on one/month)&quot; 
+
+responses &lt;- as.data.frame(table(rsurvey[[question]], exclude=NULL)) %&gt;%
+  arrange(desc(Freq)) %&gt;%
+  rename(Response = Var1)
+knitr::kable(responses,
+             caption = question)</code></pre>
+<table>
+<caption><span id="tab:q3">Table 1: </span>What time do you prefer? (planning on one/month)</caption>
+<thead>
+<tr class="header">
+<th align="left">Response</th>
+<th align="right">Freq</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Weekdays, 6-8pm</td>
+<td align="right">18</td>
+</tr>
+<tr class="even">
+<td align="left">Saturday, Sunday</td>
+<td align="right">10</td>
+</tr>
+<tr class="odd">
+<td align="left">Weekdays, 6-8pm, Saturday</td>
+<td align="right">3</td>
+</tr>
+<tr class="even">
+<td align="left">Weekdays, 6-8pm, Saturday, Sunday</td>
+<td align="right">2</td>
+</tr>
+<tr class="odd">
+<td align="left">Saturday, Thursdays after 6 pm</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="left">Tuesday, 6-8pm</td>
+<td align="right">1</td>
+</tr>
+<tr class="odd">
+<td align="left">Weekdays, 6-8pm, Saturday, NOT Mondays, Thursdays or Sundays.</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="left">Weekdays, 6-8pm, Saturday, Sunday, Tuesdays and Wednesdays!</td>
+<td align="right">1</td>
+</tr>
+<tr class="odd">
+<td align="left">Weekdays, 6-8pm, Sunday</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="left">Weekdays, 6-8pm, Sunday, It really depends on my schedule… I work in Delaware, but if I know enough in advance, I can work from home that day.</td>
+<td align="right">1</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Are you interested in planning a future event or leading an event?</strong></p>
+<pre class="r"><code>question &lt;- &quot;Are you interested in planning a future event or leading an event?&quot;
+
+ggplot(rsurvey, aes(x=`Are you interested in planning a future event or leading an event?`)) +
+  geom_bar() +
+  coord_flip() +
+  ggtitle(question) + 
+  theme_minimal() + 
+  xlab(&quot;&quot;) </code></pre>
+<p><img src="/post/2018-03-11-survey-data_files/figure-html/q4-1.png" width="672" /></p>
+<p><strong>What types of events would you be interested in attending?</strong></p>
+<pre class="r"><code>question &lt;- &quot;What types of events would you be interested in attending (choose as many responses as you like)?&quot;
+# We need to transform the data to see how many times we got each response
+responses &lt;- rsurvey[[question]]
+choices &lt;- c(&quot;Introduction to R workshops&quot;,
+             &quot;Events with advice on careers in statistics and data science/career panels&quot;,
+             &quot;Presentations of research that uses R&quot;,
+             &quot;Community project&quot;,
+             &quot;Tutorials on advanced R topics&quot;,
+             &quot;Workshops on specific packages&quot;,
+             &quot;General networking&quot;,
+             &quot;Mentoring&quot;,
+             &quot;Paired code review&quot;)
+response_table &lt;- as.data.frame(sapply(choices, function(x) length(grep(x, responses)))) %&gt;%
+  rownames_to_column()
+colnames(response_table) &lt;- c(&quot;Response&quot;,&quot;Freq&quot;)
+response_table &lt;- arrange(response_table, desc(Freq))
+  
+knitr::kable(response_table, caption = question)</code></pre>
+<table>
+<caption><span id="tab:q5">Table 2: </span>What types of events would you be interested in attending (choose as many responses as you like)?</caption>
+<thead>
+<tr class="header">
+<th align="left">Response</th>
+<th align="right">Freq</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Workshops on specific packages</td>
+<td align="right">31</td>
+</tr>
+<tr class="even">
+<td align="left">Presentations of research that uses R</td>
+<td align="right">28</td>
+</tr>
+<tr class="odd">
+<td align="left">Tutorials on advanced R topics</td>
+<td align="right">28</td>
+</tr>
+<tr class="even">
+<td align="left">Events with advice on careers in statistics and data science/career panels</td>
+<td align="right">27</td>
+</tr>
+<tr class="odd">
+<td align="left">Community project</td>
+<td align="right">26</td>
+</tr>
+<tr class="even">
+<td align="left">Introduction to R workshops</td>
+<td align="right">22</td>
+</tr>
+<tr class="odd">
+<td align="left">Mentoring</td>
+<td align="right">20</td>
+</tr>
+<tr class="even">
+<td align="left">General networking</td>
+<td align="right">18</td>
+</tr>
+<tr class="odd">
+<td align="left">Paired code review</td>
+<td align="right">15</td>
+</tr>
+</tbody>
+</table>
+<p><strong>If you are interested in giving a talk or leading a workshop on something, what would it be?</strong></p>
+<pre class="r"><code>question &lt;- &quot;If you are interested in giving a talk or leading a workshop on something, what would it be?&quot;
+
+nonempty_responses &lt;- na.omit(rsurvey[[question]])
+print_this &lt;- sapply(nonempty_responses, function(x) cat(&#39;+ &#39;,x,&#39;\n&#39;))</code></pre>
+<ul>
+<li>Git</li>
+<li>I could do an intro to R (basics, functions and loops). But would love to co-teach with someone else.</li>
+<li>Not sure yet, but this is something I would be interested in doing in the future</li>
+<li>Statistics-regression, GLM, machine learning, unsupervised/supervised methods, hypothesis testing, very basic text analytics</li>
+<li>As of now, I guess I’d do something on the American Community Survey package, if folks would find it useful.</li>
+<li>I am afraid I don’t know enough to give a talk.</li>
+<li>Factor analysis, Conjoint analysis, hierarchical linear regression with R</li>
+</ul>
+</div>
+<div id="my-takeaways" class="section level2">
+<h2>My takeaways</h2>
+<p>Thank you to all the Philly R-Ladies who took the survey!</p>
+<p>Our group represents a variety of experience levels - some have never used R and some are R experts. We even had some people volunteer to help with planning and content for future events, which I am really excited about!</p>
+<p>Importantly, the survey confirmed that we will continue to meet in center city or university city (thank you to MakeOffices and Drexel who have hosted us).</p>
+<p>As far as when we meet, weekdays appear to be the preference, but there is also a lot of interest in a weekend meetup. Our previous events have been on Wednesdays, but we plan to mix it up so that people with conflicts every Wednesday can attend. One practical consideration I have encountered is that it is harder to find a venue for a weekend meetup. Maybe someone wants to email us at <a href="mailto:philly@rladies.org">philly@rladies.org</a> with location ideas?</p>
+<p>This process got me thinking… let’s plan to do another survey at the end of the year to see how the group has evolved.</p>
+</div>
